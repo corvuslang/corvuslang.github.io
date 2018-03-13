@@ -1,0 +1,212 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Corvus JS</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://writ.cmcenroe.me/1.0.4/writ.min.css">
+  <style>
+    code {
+      border: none;
+      background-color: transparent;
+      font-weight: 600;
+    }
+
+    section::after {
+      content: "🐦 🐦 🐦";
+      display: block;
+      text-align: center;
+      margin-top: 2rem;
+      margin-bottom: 3rem;
+      letter-spacing: 1ch;
+    }
+
+    code,
+    pre.result {
+      font-weight: 600;
+    }
+
+    div.example {
+      border-left: 3px solid #dddddd;
+      padding-left: calc(1em + 3px);
+      margin-left: calc(-1rem - 3px);
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .example textarea {
+      border: none;
+      background-color: #ffffea;
+      margin-top: 0.5rem;
+      width: 100%;
+      padding: 0.5rem;
+      font-family: Consolas, Liberation Mono, Menlo, Courier, monospace;
+      overflow-y: none;
+      overflow-x: scroll;
+      white-space: pre;
+    }
+
+    .example pre.result {
+      margin-top: calc(0.5rem - 1px);
+      border: none;
+    }
+
+    .example pre.result::before {
+      content: "= ";
+    }
+
+    .example pre.error {
+      background-color: pink;
+    }
+
+    .example h3 {
+      font-size: 1rem;
+      line-height: 1.5rem;
+      font-style: oblique;
+    }
+
+    .example input {
+      border: none;
+      border-bottom: 1px solid #dddddd;
+      padding: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .example label {
+      font-family: monospace;
+    }
+
+    .example label::after {
+      content: " = ";
+    }
+
+    .underline {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>What the heck is a Corvus!?</h1>
+    <p>An introduction to scripting with Corvus</p>
+  </header>
+  <main>
+    <section>
+      <p>
+        <em>Corvus</em> is a friendly language for scripting just about anything. This guide introduces the language for those
+        of us who aren't mega-programmers (yet 💪) with bite-sized examples.
+      </p>
+      <p>
+        By the way, the name "Corvus" comes from the family of birds that includes Crows and Ravens. They are highly intelligent,
+        have adapted to a wide variety of climates, can work in groups, and are incredibly persistent. We hope Corvus inspires
+        these same qualities.
+      </p>
+    </section>
+    <section>
+      <h2>Numbers</h2>
+      <blockquote>
+        Ok, so... programming huh? Am I going to need maths for this?
+      </blockquote>
+      <p>
+        <em>Relax,</em> there will be a little arithmetic, but we'll make the computer do it for us. First, let's get our bearings...</p>
+
+      <p>
+        <span class="underline">This guide is interactive</span>. Wherever you see an example, the yellow box is a
+        <em>script</em>
+        and the grey box shows the result of running that script. When you can change the contents of the yellow box you will see
+        results automatically. Your first script is just a single number:
+        <code>42</code>.
+      </p>
+      <div class="example" data-title="numbers" data-no-inputs="true">42</div>
+      <p>
+        That's right, this script is
+        <em>yours</em> now. Go ahead and change the number, the result will change with it. If you change the script to something
+        that isn't a number, like "cheese grater", you might see an error: the grey box will turn pink and show an error
+        message. No big deal 🤷‍♀️, it's just a box. Change the yellow box back to a number and you're set.
+      </p>
+      <p>
+        Ok, so how about that arithmetic? To get the computer to do our calculations, we're going to use a
+        <em>function</em> named
+        <code>calc</code>. Functions are how we ask the computer questions, and when we use a function in a script we say we're
+        <em>calling</em> the function.
+      </p>
+      <blockquote style="display: flex; border-left: none">
+        <div style="font-size: 2rem; margin-right: 1rem; align-self: center;">☎️</div>
+        <div style="font-style: oblique">
+          Hey
+          <code>calc</code>, how've you been? ... yeah? ... hey so um... what really? no! I can't believe he did that! What a ...
+          right, right. Why was I calling? Oh right, I was wondering if you could help me out with something ... what's twelve
+          plus thirty?
+        </div>
+      </blockquote>
+      <div class="example" data-title='calling a function' data-no-inputs="true">calc: 12 plus: 30</div>
+      <p>
+        Computers are quite dull compared to people, they don't interrupt us with juicy gossip when we call, just give us the boring
+        answer straight away: "forty-two",
+        <em>click.</em> 😑 ... but that's also why we love them.
+      </p>
+      <p>
+        Just like the calculator you had in school (or the calculator app on your phone),
+        <code>calc</code> can do more than add. You can ask
+        <code>calc</code> to do more calculations by adding more
+        <em>keywords</em> to the call. In
+        <em>addition</em> (😬) to
+        <code>plus</code>,
+        <code>calc</code> understands the keywords
+        <code>subtract</code>,
+        <code>times</code>, and
+        <code>dividedBy</code>. Just like a pocket calculator, it performs these operations in the order they are written, here's
+        a longer example to demonstrate:</p>
+      <div class="example" data-title="a bit more calculation" data-no-inputs="true">calc: 10 times: 2 plus: 1 dividedBy: 3 times: 6</div>
+      <p>
+        Remember how these examples are interactive? I want you to really go to town on this one. Add like a hundred different calculator
+        operations. If you don't make the grey box turn pink at least once, you're not really
+        <strong>
+          <em>living</em>
+        </strong>.
+      </p>
+    </section>
+    <section>
+      <h2 id="more-functions">More functions and variables</h2>
+      <p>
+        You've mastered
+        <code>calc</code>, but having just one function is a lot like having a phone that only calls one person, so let's expand
+        our repertoire (or is it an entourage? 🤔).
+      </p>
+      <p>
+        Next up we're going to ask the computer another easy question: is one number bigger than another?
+      </p>
+      <div class="example" data-no-inputs="true" data-title="comparing numbers">compare: 10 biggerThan: 20</div>
+      <p>
+        Why bother asking the computer a question with an obvious answer? To answer that we need to introduce
+        <em>variables</em>. This next example shows a new capability: if you write a word (like
+        <code>rewardPoints</code>), Corvus assumes that it refers to a number that comes from outside your script.
+      </p>
+      <div class="example" data-title="variables">compare: rewardPoints biggerThan: 20</div>
+      <p>
+        What does it mean for a number to come from "outside" your script?
+      </p>
+      <div class="example" data-title="variables">calc: foo times: bar</div>
+    </section>
+    <div class="example" data-title="true and false">true</div>
+    <div class="example" data-title="strings">"hello"</div>
+
+  </main>
+  <footer>
+    <hr/>
+    <h3>Footnotes</h3>
+    <ul>
+      <li id="footnote-programmers">If you're already a programmer, you might also be interested in the
+        <a href="why.html">Why Corvus?</a> page.</li>
+    </ul>
+  </footer>
+  <script src="jsoneditor.min.js"></script>
+  <script src="jsoneditor_theme.js"></script>
+  <script src="corvus_js.js"></script>
+  <script src="api.js"></script>
+  <script src="corvus_example.js"></script>
+</body>
+
+</html>
