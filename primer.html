@@ -2,10 +2,11 @@
 <html>
 
 <head>
-  <title>Corvus JS</title>
+  <title>Rainbow</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://writ.cmcenroe.me/1.0.4/writ.min.css">
+  <link rel="stylesheet" href="codemirror-5.36.0/lib/codemirror.css">
   <style>
     code {
       border: none;
@@ -14,12 +15,16 @@
     }
 
     section::after {
-      content: "🐦 🐦 🐦";
+      content: "🌈";
       display: block;
+      transform: rotate(43deg);
       text-align: center;
       margin-top: 2rem;
       margin-bottom: 3rem;
-      letter-spacing: 1ch;
+      line-height: 2rem;
+      letter-spacing: 2rem;
+      font-size: 200%;
+      opacity: 0.6;
     }
 
     code,
@@ -50,13 +55,22 @@
     .example pre.result {
       margin-top: calc(0.5rem - 1px);
       border: none;
+      width: 100%;
+    }
+
+    .example pre.result.flashy {
+      background-color: #fdff93
     }
 
     .example pre.result::before {
       content: "= ";
     }
 
-    .example pre.error {
+    .example pre.result.error::before {
+      content: "";
+    }
+
+    .error {
       background-color: pink;
     }
 
@@ -66,15 +80,25 @@
       font-style: oblique;
     }
 
+    .example label {
+      font-family: Consolas, Liberation Mono, Menlo, Courier, monospace;
+    }
+
+    .example div[data-schemaid="root"] div[data-schematype="object"] h3 {
+      /* nested objects */
+      font-family: Consolas, Liberation Mono, Menlo, Courier, monospace;
+      font-style: normal;
+    }
+
+    .example div[data-schemaid="root"] div[data-schematype="object"] .row {
+      margin-left: 1rem;
+    }
+
     .example input {
       border: none;
       border-bottom: 1px solid #dddddd;
       padding: 0.5rem;
       font-size: 1rem;
-    }
-
-    .example label {
-      font-family: monospace;
     }
 
     .example label::after {
@@ -84,25 +108,32 @@
     .underline {
       text-decoration: underline;
     }
+
+
+    .CodeMirror {
+      height: auto;
+    }
   </style>
 </head>
 
 <body>
   <header>
-    <h1>What the heck is a Corvus!?</h1>
-    <p>An introduction to scripting with Corvus</p>
+    <h1>What the heck is Rainbow 🌈!?</h1>
+    <p>An introduction to scripting with Rainbow</p>
   </header>
   <main>
     <section>
       <p>
-        <em>Corvus</em> is a friendly language for scripting just about anything. This guide introduces the language for those
+        <em>Rainbow</em> is a friendly language for scripting just about anything. This guide introduces the language for those
         of us who aren't mega-programmers (yet 💪) with bite-sized examples.
       </p>
+      <!--
       <p>
-        By the way, the name "Corvus" comes from the family of birds that includes Crows and Ravens. They are highly intelligent,
-        have adapted to a wide variety of climates, can work in groups, and are incredibly persistent. We hope Corvus inspires
+        By the way, the name "Rainbow" comes from the family of birds that includes Crows and Ravens. They are highly intelligent,
+        have adapted to a wide variety of climates, can work in groups, and are incredibly persistent. We hope Rainbow inspires
         these same qualities.
       </p>
+      -->
     </section>
     <section>
       <h2>Numbers</h2>
@@ -115,16 +146,23 @@
       <p>
         <span class="underline">This guide is interactive</span>. Wherever you see an example, the yellow box is a
         <em>script</em>
-        and the grey box shows the result of running that script. When you can change the contents of the yellow box you will see
-        results automatically. Your first script is just a single number:
-        <code>42</code>.
+        and the grey box shows the result of running that script. To run a script place your cursor in the yellow box and press
+        <code>Ctrl</code> +
+        <code>Enter</code> (or
+        <code>⌘</code> +
+        <code>Enter</code> on Apple computers). Try it now with your first script:
       </p>
       <div class="example" data-title="numbers" data-no-inputs="true">42</div>
       <p>
         That's right, this script is
-        <em>yours</em> now. Go ahead and change the number, the result will change with it. If you change the script to something
-        that isn't a number, like "cheese grater", you might see an error: the grey box will turn pink and show an error
-        message. No big deal 🤷‍♀️, it's just a box. Change the yellow box back to a number and you're set.
+        <em>yours</em> now. Go ahead and change the number, press
+        <code>Ctrl</code> +
+        <code>Enter</code> (or
+        <code>⌘</code> +
+        <code>Enter</code> on Apple computers) and the result will change with it. If you change the script to something that Rainbow
+        doesn't understand, like
+        <code>pizza box</code>, the grey box will turn pink and show an error message. No big deal 🤷‍♀️, it's just a box. Change
+        the yellow box back to a number and you're set.
       </p>
       <p>
         Ok, so how about that arithmetic? To get the computer to do our calculations, we're going to use a
@@ -182,13 +220,29 @@
       <p>
         Why bother asking the computer a question with an obvious answer? To answer that we need to introduce
         <em>variables</em>. This next example shows a new capability: if you write a word (like
-        <code>rewardPoints</code>), Corvus assumes that it refers to a number that comes from outside your script.
+        <code>rewardPoints</code>), Rainbow assumes that it refers to a number that comes from outside your script.
       </p>
       <div class="example" data-title="variables">compare: rewardPoints biggerThan: 20</div>
       <p>
-        What does it mean for a number to come from "outside" your script?
+        What does it mean for a number to come from "outside" your script? That depends on the context in which you are using Rainbow.
+        In the "Real World" Rainbow scripts are often run in response to an
+        <em>event:</em> somebody added an item to their order, an email was received, one unstable world leader are subtweeted
+        another, etc. etc. To keep it simple and transparent in this guide, we ask you to provide all the input.
       </p>
-      <div class="example" data-title="variables">calc: foo times: bar</div>
+    </section>
+    <section>
+      <h2 id="text">Letters and words</h2>
+      <p>
+        So far we've been using Rainbow as a sort of weird calculator, next we'll use it as weird text editor. Just like
+        <code>42</code> earlier, this is the simplest script that uses text:
+      </p>
+      <div class="example" data-no-inputs="true" data-title="text">"Hello, world"</div>
+      <p>
+        The quotes tell Rainbow to use the letters inside as text and not code. Without them Rainbow thinks we meant a function or
+        variable called
+        <code>Hello</code>.
+      </p>
+      <p>Now that we have some text, what can we do with it? One thing we can do is ask Rainbow to say it back to us.</p>
     </section>
     <div class="example" data-title="true and false">true</div>
     <div class="example" data-title="strings">"hello"</div>
@@ -199,11 +253,13 @@
     <h3>Footnotes</h3>
     <ul>
       <li id="footnote-programmers">If you're already a programmer, you might also be interested in the
-        <a href="why.html">Why Corvus?</a> page.</li>
+        <a href="why.html">Why Rainbow?</a> page.</li>
     </ul>
   </footer>
   <script src="jsoneditor.min.js"></script>
   <script src="jsoneditor_theme.js"></script>
+  <script src="codemirror-5.36.0/lib/codemirror.js"></script>
+  <script src="codemirror-5.36.0/addon/edit/closebrackets.js"></script>
   <script src="corvus_js.js"></script>
   <script src="api.js"></script>
   <script src="corvus_example.js"></script>

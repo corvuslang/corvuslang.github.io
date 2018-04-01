@@ -318,14 +318,21 @@ Module.STDWEB_PRIVATE.acquire_rust_reference = function( reference ) {
         return 0;
     }
 
-    var refid = Module.STDWEB_PRIVATE.ref_to_id_map.get( reference );
+    var id_to_refcount_map = Module.STDWEB_PRIVATE.id_to_refcount_map;
+    var id_to_ref_map = Module.STDWEB_PRIVATE.id_to_ref_map;
+    var ref_to_id_map = Module.STDWEB_PRIVATE.ref_to_id_map;
+
+    var refid = ref_to_id_map.get( reference );
     if( refid === undefined ) {
         refid = Module.STDWEB_PRIVATE.last_refid++;
-        Module.STDWEB_PRIVATE.ref_to_id_map.set( reference, refid );
-        Module.STDWEB_PRIVATE.id_to_ref_map[ refid ] = reference;
-        Module.STDWEB_PRIVATE.id_to_refcount_map[ refid ] = 1;
+        ref_to_id_map.set( reference, refid );
+    }
+
+    if( refid in id_to_ref_map ) {
+        id_to_refcount_map[ refid ]++;
     } else {
-        Module.STDWEB_PRIVATE.id_to_refcount_map[ refid ]++;
+        id_to_ref_map[ refid ] = reference;
+        id_to_refcount_map[ refid ] = 1;
     }
 
     return refid;
@@ -347,7 +354,6 @@ Module.STDWEB_PRIVATE.decrement_refcount = function( refid ) {
         var reference = id_to_ref_map[ refid ];
         delete id_to_ref_map[ refid ];
         delete id_to_refcount_map[ refid ];
-        Module.STDWEB_PRIVATE.ref_to_id_map.delete( reference );
     }
 };
 
@@ -440,32 +446,53 @@ Module.STDWEB_PRIVATE.acquire_tmp = function( dummy ) {
             "__extjs_9f22d4ca7bc938409787341b7db181f8dd41e6df": function($0) {
                 Module.STDWEB_PRIVATE.increment_refcount( $0 );
             },
-            "__extjs_ff5103e6cc179d13b4c7a785bdce2708fd559fc0": function($0) {
-                Module.STDWEB_PRIVATE.tmp = Module.STDWEB_PRIVATE.to_js( $0 );
-            },
-            "__extjs_8c32019649bb581b1b742eeedfc410e2bedd56a6": function($0, $1) {
-                var array = Module.STDWEB_PRIVATE.acquire_js_reference( $0 );Module.STDWEB_PRIVATE.serialize_array( $1, array );
+            "__extjs_3f12bfb802f39165bc73bb514366faaba98d3e6c": function($0, $1, $2) {
+                $1 = Module.STDWEB_PRIVATE.to_js($1);$2 = Module.STDWEB_PRIVATE.to_js($2);Module.STDWEB_PRIVATE.from_js($0, (function(){var cb = ($1); return cb (($2))})());
             },
             "__extjs_ee41f864457c794c278cdcafc28967ffbac29706": function($0, $1) {
                 $1 = Module.STDWEB_PRIVATE.to_js($1);Module.STDWEB_PRIVATE.from_js($0, (function(){return ($1);})());
             },
-            "__extjs_72fc447820458c720c68d0d8e078ede631edd723": function($0, $1, $2) {
-                console.error( 'Panic location:', Module.STDWEB_PRIVATE.to_js_string( $0, $1 ) + ':' + $2 );
-            },
             "__extjs_dc2fd915bd92f9e9c6a3bd15174f1414eee3dbaf": function() {
                 console.error( 'Encountered a panic!' );
             },
-            "__extjs_97495987af1720d8a9a923fa4683a7b683e3acd6": function($0, $1) {
-                console.error( 'Panic error message:', Module.STDWEB_PRIVATE.to_js_string( $0, $1 ) );
+            "__extjs_0aced9e2351ced72f1ff99645a129132b16c0d3c": function($0) {
+                var value = Module.STDWEB_PRIVATE.get_raw_value( $0 );return Module.STDWEB_PRIVATE.register_raw_value( value );
             },
-            "__extjs_db0226ae1bbecd407e9880ee28ddc70fc3322d9c": function($0) {
-                $0 = Module.STDWEB_PRIVATE.to_js($0);Module.STDWEB_PRIVATE.unregister_raw_value (($0));
+            "__extjs_8c32019649bb581b1b742eeedfc410e2bedd56a6": function($0, $1) {
+                var array = Module.STDWEB_PRIVATE.acquire_js_reference( $0 );Module.STDWEB_PRIVATE.serialize_array( $1, array );
+            },
+            "__extjs_80a88fca18b223bc431783405919f8321ee277a9": function($0) {
+                return (Module.STDWEB_PRIVATE.acquire_js_reference( $0 ) instanceof Date) | 0;
+            },
+            "__extjs_72fc447820458c720c68d0d8e078ede631edd723": function($0, $1, $2) {
+                console.error( 'Panic location:', Module.STDWEB_PRIVATE.to_js_string( $0, $1 ) + ':' + $2 );
             },
             "__extjs_f814fda503cb20016f78481f85431d48a7c4e731": function($0, $1) {
                 var object = Module.STDWEB_PRIVATE.acquire_js_reference( $0 );Module.STDWEB_PRIVATE.serialize_object( $1, object );
             },
+            "__extjs_79e0f16ebeb2ff1733d3e1516622f2a6c27fc7fa": function($0, $1) {
+                $1 = Module.STDWEB_PRIVATE.to_js($1);Module.STDWEB_PRIVATE.from_js($0, (function(){return ($1)[Symbol.iterator]()})());
+            },
+            "__extjs_ff5103e6cc179d13b4c7a785bdce2708fd559fc0": function($0) {
+                Module.STDWEB_PRIVATE.tmp = Module.STDWEB_PRIVATE.to_js( $0 );
+            },
             "__extjs_93b9872dc3d816765ab0e68585457a4b8d33560b": function($0) {
                 $0 = Module.STDWEB_PRIVATE.to_js($0);Promise.resolve (). then (function (){($0)();});
+            },
+            "__extjs_97495987af1720d8a9a923fa4683a7b683e3acd6": function($0, $1) {
+                console.error( 'Panic error message:', Module.STDWEB_PRIVATE.to_js_string( $0, $1 ) );
+            },
+            "__extjs_ec5f17b629db0b37cef1b6141e3dfad07ed044ca": function($0, $1) {
+                $1 = Module.STDWEB_PRIVATE.to_js($1);Module.STDWEB_PRIVATE.from_js($0, (function(){return new Date (($1));})());
+            },
+            "__extjs_6a3fd7b87c15100189ec55507aab3d0e6002afdf": function($0, $1) {
+                $1 = Module.STDWEB_PRIVATE.to_js($1);Module.STDWEB_PRIVATE.from_js($0, (function(){return ($1). next ()})());
+            },
+            "__extjs_db0226ae1bbecd407e9880ee28ddc70fc3322d9c": function($0) {
+                $0 = Module.STDWEB_PRIVATE.to_js($0);Module.STDWEB_PRIVATE.unregister_raw_value (($0));
+            },
+            "__extjs_c6b1bf73c8dd14844e633ddec557fd8e13c9359b": function($0, $1, $2) {
+                $1 = Module.STDWEB_PRIVATE.to_js($1);$2 = Module.STDWEB_PRIVATE.to_js($2);Module.STDWEB_PRIVATE.from_js($0, (function(){return ($1)[($2)]})());
             },
             "__web_on_grow": function() {
                 const buffer = Module.instance.exports.memory.buffer;
@@ -487,32 +514,52 @@ Module.STDWEB_PRIVATE.acquire_tmp = function( dummy ) {
         Object.defineProperty( Module, 'web_free', { value: Module.instance.exports.__web_free } );
         Object.defineProperty( Module, 'web_table', { value: Module.instance.exports.__web_table } );
 
-        Module.exports.alloc_bird = function alloc_bird() {
-    return Module.instance.exports.alloc_bird();
+        Module.exports.alloc_ns = function alloc_ns() {
+    return Module.instance.exports.alloc_ns();
 }
 ;
-                Module.exports.drop_bird = function drop_bird(handle) {
-    Module.instance.exports.drop_bird(handle);
+                Module.exports.drop_ns = function drop_ns(handle) {
+    Module.instance.exports.drop_ns(handle);
 }
 ;
-                Module.exports.evaluate = function evaluate(handle, code, values) {
-    return Module.STDWEB_PRIVATE.acquire_tmp(Module.instance.exports.evaluate(handle, Module.STDWEB_PRIVATE.prepare_any_arg(code), Module.STDWEB_PRIVATE.prepare_any_arg(values)));
+                Module.exports.print_sig = function print_sig(signature) {
+    return Module.STDWEB_PRIVATE.acquire_tmp(Module.instance.exports.print_sig(Module.STDWEB_PRIVATE.prepare_any_arg(signature)));
 }
 ;
-                Module.exports.type_of = function type_of(handle, code) {
-    return Module.STDWEB_PRIVATE.acquire_tmp(Module.instance.exports.type_of(handle, Module.STDWEB_PRIVATE.prepare_any_arg(code)));
+                Module.exports.define = function define(ns_ptr, signature, callback) {
+    return Module.STDWEB_PRIVATE.acquire_tmp(Module.instance.exports.define(ns_ptr, Module.STDWEB_PRIVATE.prepare_any_arg(signature), Module.STDWEB_PRIVATE.prepare_any_arg(callback)));
 }
 ;
-                Module.exports.set_var = function set_var(handle, name, val) {
-    Module.instance.exports.set_var(handle, Module.STDWEB_PRIVATE.prepare_any_arg(name), Module.STDWEB_PRIVATE.prepare_any_arg(val));
+                Module.exports.intern_symbol = function intern_symbol(ns_ptr, symbol) {
+    return Module.instance.exports.intern_symbol(ns_ptr, Module.STDWEB_PRIVATE.prepare_any_arg(symbol));
 }
 ;
-                Module.exports.get_var = function get_var(handle) {
-    return Module.STDWEB_PRIVATE.acquire_tmp(Module.instance.exports.get_var(handle));
+                Module.exports.compile = function compile(ns_ptr, input) {
+    return Module.instance.exports.compile(ns_ptr, Module.STDWEB_PRIVATE.prepare_any_arg(input));
 }
 ;
-                Module.exports.define = function define(handle, definition) {
-    return Module.STDWEB_PRIVATE.acquire_tmp(Module.instance.exports.define(handle, Module.STDWEB_PRIVATE.prepare_any_arg(definition)));
+                Module.exports.drop_script = function drop_script(handle) {
+    Module.instance.exports.drop_script(handle);
+}
+;
+                Module.exports.recompile = function recompile(script_ptr, code) {
+    Module.instance.exports.recompile(script_ptr, Module.STDWEB_PRIVATE.prepare_any_arg(code));
+}
+;
+                Module.exports.type_info = function type_info(script_ptr) {
+    return Module.STDWEB_PRIVATE.acquire_tmp(Module.instance.exports.type_info(script_ptr));
+}
+;
+                Module.exports.evaluate = function evaluate(script_ptr, inputs) {
+    return Module.STDWEB_PRIVATE.acquire_tmp(Module.instance.exports.evaluate(script_ptr, Module.STDWEB_PRIVATE.prepare_any_arg(inputs)));
+}
+;
+                Module.exports.call_block = function call_block(block_ptr, args) {
+    return Module.STDWEB_PRIVATE.acquire_tmp(Module.instance.exports.call_block(block_ptr, Module.STDWEB_PRIVATE.prepare_any_arg(args)));
+}
+;
+                Module.exports.drop_block = function drop_block(block_ptr) {
+    Module.instance.exports.drop_block(block_ptr);
 }
 ;
         __imports.env.__web_on_grow();
