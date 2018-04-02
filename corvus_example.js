@@ -109,7 +109,21 @@ window.CorvusExample = (function () {
 
     function humanizeTypeError(error, sourceCode) {
       if (error === 'UnknownFunction') {
-        return `I don't know any function named "${sourceCode}"`
+        return `I don't know any function named "${sourceCode.split(':')[0]}"`
+      }
+      if (error.UnknownKeyword) {
+        const sig = namespace.getSignature(error.UnknownKeyword)
+        let maybeYouMeant = ''
+        if (sig) {
+          const candidates = sig.args.slice(1).map(arg => [levenshteinD(sourceCode, arg.name), arg.name])
+            .sort(([a], [b]) => a - b)
+            .slice(0, 4)
+            .map(([_, kw]) => kw)
+          if (candidates.length > 0) {
+            maybeYouMeant = `. Maybe you meant ${oxford(candidates)}?`
+          }
+        }
+        return `the ${error.UnknownKeyword} function doesn't understand this keyword${maybeYouMeant}`
       }
       if (error.Constraint) {
         const [typeLocation, problem] = error.Constraint
@@ -123,6 +137,12 @@ window.CorvusExample = (function () {
             actual
           } = problem.BlockArity;
           return `this block requires ${actual} arguments but the function will only provide ${expected}`
+        }
+        if (problem.FieldMissing) {
+          return `this record must contain a field named ${problem.FieldMissing}`
+        }
+        if (problem.FieldOptional) {
+          return `the ${problem.FieldOptional} field of this record is not guaranteed to be present`
         }
       }
       return JSON.stringify(error)
@@ -192,6 +212,7 @@ window.CorvusExample = (function () {
     }
   }
 
+
   function type2schema(type) {
     if (typeof type === 'string') {
       switch (type) {
@@ -260,6 +281,70 @@ window.CorvusExample = (function () {
       }
     }
   }
+
+  // from npmjs.com/package/meant
+  function levenshteinD(s1, s2) {
+    var d = []
+    var i = 0
+
+    for (i = 0; i <= s1.length; i++) d[i] = [i]
+    for (i = 0; i <= s2.length; i++) d[0][i] = i
+
+    s2.split('').forEach(function (c2, j) {
+      s1.split('').forEach(function (c1, i) {
+        if (c1 === c2) {
+          d[i + 1][j + 1] = d[i][j]
+          return
+        }
+        d[i + 1][j + 1] = Math.min(
+          d[i][j + 1] + 1,
+          d[i + 1][j] + 1,
+          d[i][j] + 1
+        )
+      })
+    })
+
+    return d[s1.length][s2.length]
+  }
+
+  // from npmjs.com/package/meant
+  function meant(scmd, commands) {
+    var d = []
+    var bestSimilarity = []
+
+    commands.forEach(function (cmd, i) {
+      var item = {}
+      item[levenshteinD(scmd, cmd)] = i
+      d.push(item)
+    })
+
+    d.sort(function (a, b) {
+      return Number(Object.keys(a)[0]) - Number(Object.keys(b)[0])
+    })
+
+    d.forEach(function (item) {
+      var key = Number(Object.keys(item)[0])
+      if (scmd.length / 2 >= key) {
+        bestSimilarity.push(commands[item[key]])
+      }
+    })
+
+    return bestSimilarity
+  }
+
+  function oxford(list, connective = 'or') {
+    switch (list.length) {
+      case 0:
+        return ''
+      case 1:
+        return list[0]
+      case 2:
+        return `${list[1]} ${connective} ${list[2]}`
+      default:
+        return `${list.slice(0, -1).join(', ')} ${connective} ${list[list.length-1]}`
+    }
+  }
+
 
   const examples = new Map();
 

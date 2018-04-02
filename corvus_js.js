@@ -434,65 +434,68 @@ Module.STDWEB_PRIVATE.acquire_tmp = function( dummy ) {
 
     const __imports = {
         env: {
-            "__extjs_6ae2f0d3420b3969fbdee9a1a7eba4cef664b99f": function($0) {
-                return (Module.STDWEB_PRIVATE.acquire_js_reference( $0 ) instanceof Object) | 0;
-            },
-            "__extjs_80d6d56760c65e49b7be8b6b01c1ea861b046bf0": function($0) {
-                Module.STDWEB_PRIVATE.decrement_refcount( $0 );
+            "__extjs_9f22d4ca7bc938409787341b7db181f8dd41e6df": function($0) {
+                Module.STDWEB_PRIVATE.increment_refcount( $0 );
             },
             "__extjs_fe1e80bdcfe7f7cb820b64a40f6d286cbd345955": function($0) {
                 return (Module.STDWEB_PRIVATE.acquire_js_reference( $0 ) instanceof Array) | 0;
             },
-            "__extjs_9f22d4ca7bc938409787341b7db181f8dd41e6df": function($0) {
-                Module.STDWEB_PRIVATE.increment_refcount( $0 );
-            },
-            "__extjs_3f12bfb802f39165bc73bb514366faaba98d3e6c": function($0, $1, $2) {
-                $1 = Module.STDWEB_PRIVATE.to_js($1);$2 = Module.STDWEB_PRIVATE.to_js($2);Module.STDWEB_PRIVATE.from_js($0, (function(){var cb = ($1); return cb (($2))})());
-            },
-            "__extjs_ee41f864457c794c278cdcafc28967ffbac29706": function($0, $1) {
-                $1 = Module.STDWEB_PRIVATE.to_js($1);Module.STDWEB_PRIVATE.from_js($0, (function(){return ($1);})());
-            },
-            "__extjs_dc2fd915bd92f9e9c6a3bd15174f1414eee3dbaf": function() {
-                console.error( 'Encountered a panic!' );
-            },
-            "__extjs_0aced9e2351ced72f1ff99645a129132b16c0d3c": function($0) {
-                var value = Module.STDWEB_PRIVATE.get_raw_value( $0 );return Module.STDWEB_PRIVATE.register_raw_value( value );
-            },
-            "__extjs_8c32019649bb581b1b742eeedfc410e2bedd56a6": function($0, $1) {
-                var array = Module.STDWEB_PRIVATE.acquire_js_reference( $0 );Module.STDWEB_PRIVATE.serialize_array( $1, array );
-            },
-            "__extjs_80a88fca18b223bc431783405919f8321ee277a9": function($0) {
-                return (Module.STDWEB_PRIVATE.acquire_js_reference( $0 ) instanceof Date) | 0;
+            "__extjs_ec5f17b629db0b37cef1b6141e3dfad07ed044ca": function($0, $1) {
+                $1 = Module.STDWEB_PRIVATE.to_js($1);Module.STDWEB_PRIVATE.from_js($0, (function(){return new Date (($1));})());
             },
             "__extjs_72fc447820458c720c68d0d8e078ede631edd723": function($0, $1, $2) {
                 console.error( 'Panic location:', Module.STDWEB_PRIVATE.to_js_string( $0, $1 ) + ':' + $2 );
             },
-            "__extjs_f814fda503cb20016f78481f85431d48a7c4e731": function($0, $1) {
-                var object = Module.STDWEB_PRIVATE.acquire_js_reference( $0 );Module.STDWEB_PRIVATE.serialize_object( $1, object );
-            },
-            "__extjs_79e0f16ebeb2ff1733d3e1516622f2a6c27fc7fa": function($0, $1) {
-                $1 = Module.STDWEB_PRIVATE.to_js($1);Module.STDWEB_PRIVATE.from_js($0, (function(){return ($1)[Symbol.iterator]()})());
+            "__extjs_80d6d56760c65e49b7be8b6b01c1ea861b046bf0": function($0) {
+                Module.STDWEB_PRIVATE.decrement_refcount( $0 );
             },
             "__extjs_ff5103e6cc179d13b4c7a785bdce2708fd559fc0": function($0) {
                 Module.STDWEB_PRIVATE.tmp = Module.STDWEB_PRIVATE.to_js( $0 );
             },
+            "__extjs_6ae2f0d3420b3969fbdee9a1a7eba4cef664b99f": function($0) {
+                return (Module.STDWEB_PRIVATE.acquire_js_reference( $0 ) instanceof Object) | 0;
+            },
             "__extjs_93b9872dc3d816765ab0e68585457a4b8d33560b": function($0) {
                 $0 = Module.STDWEB_PRIVATE.to_js($0);Promise.resolve (). then (function (){($0)();});
             },
-            "__extjs_97495987af1720d8a9a923fa4683a7b683e3acd6": function($0, $1) {
-                console.error( 'Panic error message:', Module.STDWEB_PRIVATE.to_js_string( $0, $1 ) );
+            "__extjs_0aced9e2351ced72f1ff99645a129132b16c0d3c": function($0) {
+                var value = Module.STDWEB_PRIVATE.get_raw_value( $0 );return Module.STDWEB_PRIVATE.register_raw_value( value );
             },
-            "__extjs_ec5f17b629db0b37cef1b6141e3dfad07ed044ca": function($0, $1) {
-                $1 = Module.STDWEB_PRIVATE.to_js($1);Module.STDWEB_PRIVATE.from_js($0, (function(){return new Date (($1));})());
+            "__extjs_ee41f864457c794c278cdcafc28967ffbac29706": function($0, $1) {
+                $1 = Module.STDWEB_PRIVATE.to_js($1);Module.STDWEB_PRIVATE.from_js($0, (function(){return ($1);})());
+            },
+            "__extjs_f814fda503cb20016f78481f85431d48a7c4e731": function($0, $1) {
+                var object = Module.STDWEB_PRIVATE.acquire_js_reference( $0 );Module.STDWEB_PRIVATE.serialize_object( $1, object );
             },
             "__extjs_6a3fd7b87c15100189ec55507aab3d0e6002afdf": function($0, $1) {
                 $1 = Module.STDWEB_PRIVATE.to_js($1);Module.STDWEB_PRIVATE.from_js($0, (function(){return ($1). next ()})());
             },
-            "__extjs_db0226ae1bbecd407e9880ee28ddc70fc3322d9c": function($0) {
-                $0 = Module.STDWEB_PRIVATE.to_js($0);Module.STDWEB_PRIVATE.unregister_raw_value (($0));
+            "__extjs_da7526dacc33bb6de7714dde287806f568820e31": function($0) {
+                $0 = Module.STDWEB_PRIVATE.to_js($0);console.log (($0));
+            },
+            "__extjs_97495987af1720d8a9a923fa4683a7b683e3acd6": function($0, $1) {
+                console.error( 'Panic error message:', Module.STDWEB_PRIVATE.to_js_string( $0, $1 ) );
             },
             "__extjs_c6b1bf73c8dd14844e633ddec557fd8e13c9359b": function($0, $1, $2) {
                 $1 = Module.STDWEB_PRIVATE.to_js($1);$2 = Module.STDWEB_PRIVATE.to_js($2);Module.STDWEB_PRIVATE.from_js($0, (function(){return ($1)[($2)]})());
+            },
+            "__extjs_79e0f16ebeb2ff1733d3e1516622f2a6c27fc7fa": function($0, $1) {
+                $1 = Module.STDWEB_PRIVATE.to_js($1);Module.STDWEB_PRIVATE.from_js($0, (function(){return ($1)[Symbol.iterator]()})());
+            },
+            "__extjs_8c32019649bb581b1b742eeedfc410e2bedd56a6": function($0, $1) {
+                var array = Module.STDWEB_PRIVATE.acquire_js_reference( $0 );Module.STDWEB_PRIVATE.serialize_array( $1, array );
+            },
+            "__extjs_dc2fd915bd92f9e9c6a3bd15174f1414eee3dbaf": function() {
+                console.error( 'Encountered a panic!' );
+            },
+            "__extjs_80a88fca18b223bc431783405919f8321ee277a9": function($0) {
+                return (Module.STDWEB_PRIVATE.acquire_js_reference( $0 ) instanceof Date) | 0;
+            },
+            "__extjs_db0226ae1bbecd407e9880ee28ddc70fc3322d9c": function($0) {
+                $0 = Module.STDWEB_PRIVATE.to_js($0);Module.STDWEB_PRIVATE.unregister_raw_value (($0));
+            },
+            "__extjs_3f12bfb802f39165bc73bb514366faaba98d3e6c": function($0, $1, $2) {
+                $1 = Module.STDWEB_PRIVATE.to_js($1);$2 = Module.STDWEB_PRIVATE.to_js($2);Module.STDWEB_PRIVATE.from_js($0, (function(){var cb = ($1); return cb (($2))})());
             },
             "__web_on_grow": function() {
                 const buffer = Module.instance.exports.memory.buffer;
@@ -518,8 +521,8 @@ Module.STDWEB_PRIVATE.acquire_tmp = function( dummy ) {
     return Module.instance.exports.alloc_ns();
 }
 ;
-                Module.exports.drop_ns = function drop_ns(handle) {
-    Module.instance.exports.drop_ns(handle);
+                Module.exports.drop_ns = function drop_ns(ns_ptr) {
+    Module.instance.exports.drop_ns(ns_ptr);
 }
 ;
                 Module.exports.print_sig = function print_sig(signature) {
@@ -530,8 +533,20 @@ Module.STDWEB_PRIVATE.acquire_tmp = function( dummy ) {
     return Module.STDWEB_PRIVATE.acquire_tmp(Module.instance.exports.define(ns_ptr, Module.STDWEB_PRIVATE.prepare_any_arg(signature), Module.STDWEB_PRIVATE.prepare_any_arg(callback)));
 }
 ;
+                Module.exports.function_ids = function function_ids(ns_ptr) {
+    return Module.STDWEB_PRIVATE.acquire_tmp(Module.instance.exports.function_ids(ns_ptr));
+}
+;
+                Module.exports.get_signature = function get_signature(ns_ptr, id) {
+    return Module.STDWEB_PRIVATE.acquire_tmp(Module.instance.exports.get_signature(ns_ptr, Module.STDWEB_PRIVATE.prepare_any_arg(id)));
+}
+;
                 Module.exports.intern_symbol = function intern_symbol(ns_ptr, symbol) {
     return Module.instance.exports.intern_symbol(ns_ptr, Module.STDWEB_PRIVATE.prepare_any_arg(symbol));
+}
+;
+                Module.exports.lookup_symbol = function lookup_symbol(ns_ptr, symbol) {
+    return Module.STDWEB_PRIVATE.acquire_tmp(Module.instance.exports.lookup_symbol(ns_ptr, symbol));
 }
 ;
                 Module.exports.compile = function compile(ns_ptr, input) {
@@ -548,6 +563,10 @@ Module.STDWEB_PRIVATE.acquire_tmp = function( dummy ) {
 ;
                 Module.exports.type_info = function type_info(script_ptr) {
     return Module.STDWEB_PRIVATE.acquire_tmp(Module.instance.exports.type_info(script_ptr));
+}
+;
+                Module.exports.print_value = function print_value(value) {
+    Module.instance.exports.print_value(Module.STDWEB_PRIVATE.prepare_any_arg(value));
 }
 ;
                 Module.exports.evaluate = function evaluate(script_ptr, inputs) {

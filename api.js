@@ -7,7 +7,7 @@
   }
 
   const js2corvus = (val) => {
-    return [js2corvus_(val), 0]
+    return [js2corvus_(val), null]
   }
 
   const js2corvus_ = (val) => {
@@ -56,6 +56,7 @@
     }
 
     block(inputs, output) {
+      inputs = Array.isArray(inputs) ? inputs : [inputs]
       return {
         Block: [inputs.map(x => this.resolve(x)), this.resolve(output)]
       }
@@ -241,6 +242,21 @@
       this.types.define(name, type)
     }
 
+    getSignature(name) {
+      const {
+        wasmExports,
+        pointer
+      } = this[priv];
+      const sig = wasmExports.get_signature(pointer, name)
+      if (!sig) {
+        return null
+      }
+      sig.args.forEach(arg => {
+        arg.name = wasmExports.lookup_symbol(pointer, arg.name)
+      })
+      return sig
+    }
+
     compile(sourceCode) {
       const {
         wasmExports,
@@ -347,6 +363,7 @@
         throw new Error(`${JSON.stringify(name)} is not a valid argument name for this function. Valid argument names are ${Array.from(symbolMap.keys())}`)
       }
       for (let i = 0, len = rawArgs.length; i < len; i++) {
+        debugger
         if (rawArgs[i][0] === argId) {
           const jsVal = corvus2js(wasmExports, rawArgs[i][1]);
           if (typeof jsVal === 'functions') {
@@ -381,7 +398,7 @@
   }
 
   const corvus2js = (wasmExports, [val, blockPtr]) => {
-    if (blockPtr > 0) {
+    if (blockPtr) {
       return createBlockWrapper(wasmExports, blockPtr);
     }
     return val
